@@ -2,7 +2,7 @@ async function fetchWeather() {
     console.log("fetchWeather() chamada!");
     const city = document.getElementById('cityInput').value;
     const openWeatherApiKey = '8b829cb8dbb712898c23f08fd4a4b603';
-    const hgWeatherApiKey = '3117ba2a';
+    const hgWeatherApiKey = 'eea068cc';
 
     try {
         // Obter as coordenadas da cidade usando a API de Geocodificação do OpenWeather
