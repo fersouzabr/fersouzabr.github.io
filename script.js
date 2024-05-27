@@ -3,7 +3,7 @@ async function fetchWeather() {
     console.log("fetchWeather() chamada!");
     const city = document.getElementById('cityInput').value;
     const openWeatherApiKey = '8b829cb8dbb712898c23f08fd4a4b603';
-    const hgWeatherApiKey = 'eea068cc';
+    const hgWeatherApiKey = 'ed7c6b5b';
     const proxyUrl = 'https://api.allorigins.win/raw?url=';
 
     try {
