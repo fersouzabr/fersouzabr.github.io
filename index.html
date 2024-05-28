@@ -5,16 +5,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Previsão do Tempo</title>
     <link rel="stylesheet" href="styles.css">
+    
 </head>
 <body>
-    <div class="container">
-        <h1>Previsão do Tempo</h1>
-        <div class="search-box">
-            <input type="text" id="cityInput" placeholder="Digite o nome da cidade">
-            <button onclick="fetchWeather()">Buscar</button>
-        </div>
-        <div id="weatherInfo" class="weather-info">
-            <!-- Informações do tempo serão inseridas aqui -->
+    <div class="map-container">
+        <!-- Mapa será inserido aqui -->
+        <div id="map" class="map"></div>
+        <div class="container">
+            <h1>Previsão do Tempo</h1>
+            <div class="search-box">
+                <input type="text" id="cityInput" placeholder="Digite o nome da cidade">
+                <button onclick="fetchWeather()">Buscar</button>
+            </div>
+            <div id="weatherInfo" class="weather-info">
+                <!-- Informações do tempo serão inseridas aqui -->
+            </div>
         </div>
     </div>
     <script src="script.js"></script>

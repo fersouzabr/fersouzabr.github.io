@@ -3,7 +3,7 @@ async function fetchWeather() {
     console.log("fetchWeather() chamada!");
     const city = document.getElementById('cityInput').value;
     const openWeatherApiKey = '8b829cb8dbb712898c23f08fd4a4b603';
-    const hgWeatherApiKey = 'ed7c6b5b';
+    const hgWeatherApiKey = '3117ba2a';
     const proxyUrl = 'https://api.allorigins.win/raw?url=';
 
     try {
@@ -19,6 +19,9 @@ async function fetchWeather() {
 
         const { lat, lon } = geocodingData[0];
 
+        // Atualizar o mapa para a localização da cidade
+        updateMap(lat, lon);
+
         // Usar as coordenadas para obter a previsão do tempo da API da HG Weather
         const hgWeatherUrl = `https://api.hgbrasil.com/weather?key=${hgWeatherApiKey}&lat=${lat}&lon=${lon}`;
         const hgWeatherResponse = await fetch(proxyUrl + encodeURIComponent(hgWeatherUrl));
@@ -32,6 +35,33 @@ async function fetchWeather() {
     } catch (error) {
         console.error('Erro ao buscar dados da API:', error);
     }
+}
+
+// Função para inicializar o mapa com a localização do usuário
+async function initMap() {
+    let lat = -15.7942;  // Coordenadas padrão (Brasília)
+    let lon = -47.8822;
+
+    try {
+        const response = await fetch('https://ipapi.co/json/');
+        const data = await response.json();
+        lat = parseFloat(data.latitude);
+        lon = parseFloat(data.longitude);
+    } catch (error) {
+        console.error('Erro ao obter localização do IP:', error);
+    }
+
+    // Inserir iframe do Google Maps Embed API
+    const mapDiv = document.getElementById('map');
+    mapDiv.innerHTML = `<iframe width="100%" height="100%" frameborder="0" style="border:0" 
+        src="https://www.google.com/maps/embed/v1/view?key=AIzaSyDK_hnNNQJh_4WjcLaZGuSfEz3JO4z5Ue4&center=${lat},${lon}&zoom=10" allowfullscreen></iframe>`;
+}
+
+// Função para atualizar o mapa com a nova localização
+function updateMap(lat, lon) {
+    const mapDiv = document.getElementById('map');
+    mapDiv.innerHTML = `<iframe width="100%" height="100%" frameborder="0" style="border:0" 
+        src="https://www.google.com/maps/embed/v1/view?key=AIzaSyDK_hnNNQJh_4WjcLaZGuSfEz3JO4z5Ue4&center=${lat},${lon}&zoom=10" allowfullscreen></iframe>`;
 }
 
 // Função para formatar a data no formato desejado
@@ -87,3 +117,6 @@ function displayWeather(weather) {
 
     weatherInfo.style.display = 'block';
 }
+
+// Inicializar o mapa ao carregar a página
+window.onload = initMap;
